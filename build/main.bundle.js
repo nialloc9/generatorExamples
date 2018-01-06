@@ -65,68 +65,40 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__multiplierGenerator__ = __webpack_require__(1);
 
 
-var _multiplierGenerator = __webpack_require__(1);
+const multiplier = Object(__WEBPACK_IMPORTED_MODULE_0__multiplierGenerator__["a" /* default */])(10);
 
-var _multiplierGenerator2 = _interopRequireDefault(_multiplierGenerator);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var multiplier = (0, _multiplierGenerator2.default)(10);
-
-multiplier.next();
 multiplier.next();
 multiplier.next();
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const multiplierGenerator = function* (number) {
 
+    let multiplier = 10;
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var multiplierGenerator = /*#__PURE__*/regeneratorRuntime.mark(function multiplierGenerator(number) {
-    var multiplier;
-    return regeneratorRuntime.wrap(function multiplierGenerator$(_context) {
-        while (1) {
-            switch (_context.prev = _context.next) {
-                case 0:
-                    multiplier = 10;
+    console.log(number * multiplier);
+    multiplier = multiplier * 10;
+    yield;
 
+    console.log(number * multiplier);
+    multiplier = multiplier * 10;
+    yield;
 
-                    console.log(number * multiplier);
-                    multiplier = multiplier * 10;
-                    _context.next = 5;
-                    return;
+    console.log(number * multiplier);
+    multiplier = multiplier * 10;
+};
 
-                case 5:
-
-                    console.log(number * multiplier);
-                    multiplier = multiplier * 10;
-                    _context.next = 9;
-                    return;
-
-                case 9:
-
-                    console.log(number * multiplier);
-                    multiplier = multiplier * 10;
-
-                case 11:
-                case "end":
-                    return _context.stop();
-            }
-        }
-    }, multiplierGenerator, this);
-});
-
-exports.default = multiplierGenerator;
+/* harmony default export */ __webpack_exports__["a"] = (multiplierGenerator);
 
 /***/ })
 /******/ ]);

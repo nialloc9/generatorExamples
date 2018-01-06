@@ -7,11 +7,6 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: 'main.bundle.js'
     },
-    module: {
-        loaders: [
-            { test: /\.jsx?$/, loader: 'babel', }
-        ]
-    },
     stats: {
         colors: true
     },
