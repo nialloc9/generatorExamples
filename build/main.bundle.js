@@ -142,7 +142,7 @@ function *fetchGenerator (){
 
     const { downloads } = response2;
 
-    console.log(`Niall has ${public_repos} repos on github and his package redux-push has ${downloads} in the last year.`);
+    console.log(`Niall has ${public_repos} repos on github and his package redux-push has ${downloads} downloads in the last year.`);
 }
 
 const generator = fetchGenerator();
