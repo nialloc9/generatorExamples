@@ -70,12 +70,18 @@
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__multiplierGenerator__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fetchGenerator__ = __webpack_require__(2);
+
 
 
 const multiplier = Object(__WEBPACK_IMPORTED_MODULE_0__multiplierGenerator__["a" /* default */])(10);
 
 multiplier.next();
 multiplier.next();
+multiplier.next();
+
+// fetch generator
+Object(__WEBPACK_IMPORTED_MODULE_1__fetchGenerator__["a" /* default */])();
 
 /***/ }),
 /* 1 */
@@ -99,6 +105,67 @@ const multiplierGenerator = function* (number) {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (multiplierGenerator);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_request__ = __webpack_require__(3);
+
+
+/**
+ * makes an ajax request
+ * @param url
+ * @param params
+ */
+const ajaxCall = (url, params) => {
+    Object(__WEBPACK_IMPORTED_MODULE_0__common_request__["a" /* default */])({url, params, callback: (jsonResponse) => {
+        if(jsonResponse){
+            generator.next(jsonResponse);
+        }
+    }})
+};
+
+/**
+ * a generator that makes ajax requests.
+ */
+function *fetchGenerator (){
+
+    // get data from github
+    const response1 = yield ajaxCall("https://api.github.com/users/nialloc9", { method: "GET" });
+
+    // below code will only be called if the above ajax request returns data. This check is handled in ajaxCall
+    const { public_repos }  = response1;
+
+    const response2 = yield ajaxCall( "https://api.npmjs.org/downloads/point/last-year/redux-push", { method: "GET" });
+
+    const { downloads } = response2;
+
+    console.log(`Niall has ${public_repos} repos on github and his package redux-push has ${downloads} in the last year.`);
+}
+
+const generator = fetchGenerator();
+
+/* harmony default export */ __webpack_exports__["a"] = (() => {
+    generator.next();
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const request = ({url, params, callback}) => {
+    fetch(url, params).then(response => {
+        if(!response.ok){
+            return new Error("ERROR: in request")
+        }
+        return response.json();
+    }).then(json => callback(json));
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (request);
 
 /***/ })
 /******/ ]);
